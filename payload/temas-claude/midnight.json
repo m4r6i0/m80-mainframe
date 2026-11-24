@@ -1,0 +1,19 @@
+{
+  "name": "Midnight",
+  "base": "dark",
+  "overrides": {
+    "claude": "#3fd2c4",
+    "text": "#d5deef",
+    "inactive": "#8d9bb8",
+    "subtle": "#8d9bb8",
+    "promptBorder": "#3fd2c4",
+    "permission": "#3fd2c4",
+    "suggestion": "#6fb5ff",
+    "success": "#7BD88F",
+    "error": "#FF6B6B",
+    "warning": "#ffc979",
+    "diffAdded": "#1F4D2E",
+    "diffRemoved": "#5A2328",
+    "userMessageBackground": "#0b111f"
+  }
+}

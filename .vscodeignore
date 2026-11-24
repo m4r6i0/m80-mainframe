@@ -1,0 +1,5 @@
+gerar-temas.js
+*.vsix
+.m80-derivado
+.gitignore
+CHANGELOG.md

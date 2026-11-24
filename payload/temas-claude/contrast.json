@@ -1,0 +1,19 @@
+{
+  "name": "Contrast",
+  "base": "dark",
+  "overrides": {
+    "claude": "#ffd60a",
+    "text": "#ffffff",
+    "inactive": "#c8c8c8",
+    "subtle": "#c8c8c8",
+    "promptBorder": "#ffd60a",
+    "permission": "#ffd60a",
+    "suggestion": "#6cc0ff",
+    "success": "#7BD88F",
+    "error": "#FF6B6B",
+    "warning": "#ffd60a",
+    "diffAdded": "#1F4D2E",
+    "diffRemoved": "#5A2328",
+    "userMessageBackground": "#0a0a0a"
+  }
+}

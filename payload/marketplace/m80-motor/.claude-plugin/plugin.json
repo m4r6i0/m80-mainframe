@@ -1,0 +1,10 @@
+{
+  "name": "m80-motor",
+  "version": "1.7.2",
+  "description": "M80 engine: automatic model and effort router, command guard, status bar and compaction",
+  "author": {
+    "name": "M80"
+  },
+  "license": "UNLICENSED",
+  "types": "./types/index.d.ts"
+}

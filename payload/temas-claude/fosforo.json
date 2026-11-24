@@ -1,0 +1,19 @@
+{
+  "name": "Fosforo Verde",
+  "base": "dark",
+  "overrides": {
+    "claude": "#33FF33",
+    "text": "#33FF33",
+    "inactive": "#1A8C1A",
+    "subtle": "#1A8C1A",
+    "promptBorder": "#33FF33",
+    "permission": "#AAFFAA",
+    "suggestion": "#AAFFAA",
+    "success": "#AAFFAA",
+    "error": "#FF5555",
+    "warning": "#FFFF55",
+    "diffAdded": "#33FF33",
+    "diffRemoved": "#FF5555",
+    "userMessageBackground": "#0A1A0A"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Ocean",
+  "base": "dark",
+  "overrides": {
+    "claude": "#52c7ff",
+    "text": "#d3e6ee",
+    "inactive": "#86a7b6",
+    "subtle": "#86a7b6",
+    "promptBorder": "#52c7ff",
+    "permission": "#52c7ff",
+    "suggestion": "#6fd6ff",
+    "success": "#7BD88F",
+    "error": "#FF6B6B",
+    "warning": "#ffcf86",
+    "diffAdded": "#1F4D2E",
+    "diffRemoved": "#5A2328",
+    "userMessageBackground": "#091d26"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Dusk",
+  "base": "dark",
+  "overrides": {
+    "claude": "#b79cff",
+    "text": "#e0dcf0",
+    "inactive": "#a29cc0",
+    "subtle": "#a29cc0",
+    "promptBorder": "#b79cff",
+    "permission": "#b79cff",
+    "suggestion": "#c4a8ff",
+    "success": "#7BD88F",
+    "error": "#FF6B6B",
+    "warning": "#ffb88a",
+    "diffAdded": "#1F4D2E",
+    "diffRemoved": "#5A2328",
+    "userMessageBackground": "#171524"
+  }
+}

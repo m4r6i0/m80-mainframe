@@ -1,0 +1,19 @@
+{
+  "name": "Forest",
+  "base": "dark",
+  "overrides": {
+    "claude": "#6fdc9b",
+    "text": "#d6e3da",
+    "inactive": "#8fa699",
+    "subtle": "#8fa699",
+    "promptBorder": "#6fdc9b",
+    "permission": "#6fdc9b",
+    "suggestion": "#7dd3a8",
+    "success": "#7BD88F",
+    "error": "#FF6B6B",
+    "warning": "#f0a97a",
+    "diffAdded": "#1F4D2E",
+    "diffRemoved": "#5A2328",
+    "userMessageBackground": "#111a16"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "m80",
+  "owner": { "name": "M80" },
+  "metadata": { "description": "M80 template plugins" },
+  "plugins": [
+    {
+      "name": "m80-motor",
+      "source": "./m80-motor",
+      "description": "Automatic model and effort router, command guard, status bar and compaction"
+    }
+  ]
+}

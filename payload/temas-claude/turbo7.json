@@ -1,0 +1,19 @@
+{
+  "name": "Turbo Pascal 7",
+  "base": "dark-ansi",
+  "overrides": {
+    "claude": "#FFFF55",
+    "text": "#FFFF55",
+    "inactive": "#AAAAAA",
+    "subtle": "#AAAAAA",
+    "promptBorder": "#AAAAAA",
+    "permission": "#55FFFF",
+    "suggestion": "#FFFFFF",
+    "success": "#55FF55",
+    "error": "#FF5555",
+    "warning": "#FFFFFF",
+    "diffAdded": "#00AA00",
+    "diffRemoved": "#AA0000",
+    "userMessageBackground": "#0000AA"
+  }
+}

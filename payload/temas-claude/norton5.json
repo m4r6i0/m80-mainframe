@@ -1,0 +1,19 @@
+{
+  "name": "Norton Commander",
+  "base": "dark-ansi",
+  "overrides": {
+    "claude": "#55FFFF",
+    "text": "#55FFFF",
+    "inactive": "#00AAAA",
+    "subtle": "#00AAAA",
+    "promptBorder": "#55FFFF",
+    "permission": "#FFFF55",
+    "suggestion": "#FFFFFF",
+    "success": "#55FF55",
+    "error": "#FF5555",
+    "warning": "#FFFF55",
+    "diffAdded": "#00AA00",
+    "diffRemoved": "#AA0000",
+    "userMessageBackground": "#0000AA"
+  }
+}

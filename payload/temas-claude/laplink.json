@@ -1,0 +1,19 @@
+{
+  "name": "LapLink",
+  "base": "light-ansi",
+  "overrides": {
+    "claude": "#0000AA",
+    "text": "#000000",
+    "inactive": "#555555",
+    "subtle": "#555555",
+    "promptBorder": "#00AAAA",
+    "permission": "#0000AA",
+    "suggestion": "#AA00AA",
+    "success": "#00AA00",
+    "error": "#AA0000",
+    "warning": "#AA5500",
+    "diffAdded": "#00AA00",
+    "diffRemoved": "#AA0000",
+    "userMessageBackground": "#AAAAAA"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Porcelain",
+  "base": "light",
+  "overrides": {
+    "claude": "#0b7a73",
+    "text": "#1b2a2e",
+    "inactive": "#566a70",
+    "subtle": "#566a70",
+    "promptBorder": "#0b7a73",
+    "permission": "#0b7a73",
+    "suggestion": "#0b6a8f",
+    "success": "#1C7A45",
+    "error": "#B3261E",
+    "warning": "#9a5a00",
+    "diffAdded": "#C8E6D0",
+    "diffRemoved": "#F5CDCD",
+    "userMessageBackground": "#eef2f3"
+  }
+}

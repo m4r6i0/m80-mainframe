@@ -1,0 +1,19 @@
+{
+  "name": "Quarterdeck Manifest",
+  "base": "dark-ansi",
+  "overrides": {
+    "claude": "#FFAA00",
+    "text": "#FFFFFF",
+    "inactive": "#AAAAAA",
+    "subtle": "#5555FF",
+    "promptBorder": "#00AAFF",
+    "permission": "#55FF55",
+    "suggestion": "#FFFF55",
+    "success": "#55FF55",
+    "error": "#FF5555",
+    "warning": "#FFAA00",
+    "diffAdded": "#00AA00",
+    "diffRemoved": "#AA0000",
+    "userMessageBackground": "#0000AA"
+  }
+}

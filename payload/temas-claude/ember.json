@@ -1,0 +1,19 @@
+{
+  "name": "Ember",
+  "base": "dark",
+  "overrides": {
+    "claude": "#ff8c4a",
+    "text": "#e6dfd9",
+    "inactive": "#a89c93",
+    "subtle": "#a89c93",
+    "promptBorder": "#ff8c4a",
+    "permission": "#ff8c4a",
+    "suggestion": "#ffa268",
+    "success": "#7BD88F",
+    "error": "#FF6B6B",
+    "warning": "#f6d067",
+    "diffAdded": "#1F4D2E",
+    "diffRemoved": "#5A2328",
+    "userMessageBackground": "#1a1716"
+  }
+}

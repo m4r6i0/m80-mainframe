@@ -1,0 +1,364 @@
+/* M80 Monitor: background and text follow the active theme; highlights in CGA colors, as in Manifest */
+:root { --cga-azul: #0000AA; --cga-ciano: #00AAFF; --cga-verde: #55FF55; --cga-amarelo: #FFFF55; --cga-laranja: #FFAA00; --cga-vermelho: #FF5555; --cga-magenta: #FF55FF; --cga-cinza: #AAAAAA; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; background: var(--vscode-panel-background, var(--vscode-editor-background)); color: var(--vscode-editor-foreground);
+       font-family: var(--vscode-editor-font-family); font-size: var(--vscode-editor-font-size); line-height: 1.25; }
+button { font: inherit; cursor: pointer; border: 0; }
+.abas { display: flex; flex-wrap: wrap; gap: 4px; padding: 6px 8px 4px; position: sticky; top: 0; background: inherit; z-index: 2; }
+.abas button { background: var(--cga-azul); color: #fff; padding: 0 10px; box-shadow: 4px 3px 0 #000; }
+.abas button .k { color: var(--cga-amarelo); }
+.abas button.on { background: var(--cga-verde); color: #000; }
+.abas button.on .k { color: #000; }
+/* the right-hand text (project · state · ctx) shrinks and disappears first; the version mark stays */
+.abas .info { margin-left: auto; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1 1 0; text-align: right; }
+#conteudo { padding: 6px 10px 12px; }
+.vazio { opacity: .75; padding: 10px 0; }
+.giro { display: inline-block; width: 1ch; color: var(--cga-ciano); }
+
+/* model */
+.mdl { padding: 0 4px; color: #000; }
+.mdl.opus { background: var(--cga-magenta); } .mdl.sonn { background: #55FFFF; } .mdl.haik { background: var(--cga-verde); } .mdl.outro { background: var(--cga-cinza); }
+
+/* map */
+.mapa { display: grid; grid-template-columns: minmax(220px, 300px) 56px minmax(0, 1fr); align-items: center; }
+.no { background: var(--cga-azul); color: #fff; border: 3px double #fff; padding: 3px 10px; box-shadow: 7px 6px 0 #000; cursor: pointer; min-width: 0; }
+.no .t { color: var(--cga-amarelo); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.no .m { opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.no .a { opacity: .85; font-size: .92em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #55FFFF; }
+.no.principal { background: #0000CC; }
+.no.feito { background: #333; border-color: #777; } .no.feito .t { color: #ccc; }
+.no.falhou { background: #550000; border-color: var(--cga-vermelho); }
+.no.sel { outline: 2px solid var(--cga-laranja); outline-offset: 2px; }
+.filhos { display: grid; gap: 12px; position: relative; padding: 4px 0; }
+.filho { position: relative; }
+.ferr { display: inline-block; margin: 0 6px 6px 0; padding: 0 6px; color: #fff; box-shadow: 4px 3px 0 #000; }
+.ferr.velha { opacity: .45; }
+.ferr.ativa { outline: 1px solid #fff; }
+.ferr.erro { background: #AA0000 !important; }
+.detalhe { margin-top: 14px; background: var(--vscode-editorWidget-background); color: var(--vscode-editorWidget-foreground); border: 3px double var(--vscode-focusBorder); padding: 6px 10px; box-shadow: 7px 6px 0 #000; white-space: pre-wrap; }
+
+/* colors per tool */
+.f-Bash, .f-PowerShell { background: #0000AA; } .f-Edit, .f-Write, .f-NotebookEdit { background: #00AA00; } .f-Read { background: #AA5500; }
+.f-Grep, .f-Glob { background: #AA00AA; } .f-Agent, .f-Task { background: #AA0000; } .f-WebFetch, .f-WebSearch { background: #008080; } .f-outra { background: #555555; }
+
+/* jobs */
+table.jobs { width: 100%; border-collapse: collapse; }
+.jobs th { text-align: left; background: var(--cga-cinza); color: #000; font-weight: normal; padding: 0 8px; position: sticky; top: 30px; }
+.jobs td { padding: 1px 8px; white-space: nowrap; max-width: 40ch; overflow: hidden; text-overflow: ellipsis; }
+.jobs tr { cursor: pointer; }
+.jobs tr.sel td { background: var(--cga-ciano); color: #000; }
+.s-run { color: var(--cga-amarelo); } .s-ok { color: var(--cga-verde); } .s-wait { color: #55FFFF; } .s-err { color: var(--cga-vermelho); } .s-off { opacity: .6; }
+.teclas { margin-top: 8px; white-space: pre; opacity: .9; }
+.teclas b { background: var(--cga-azul); color: #fff; font-weight: normal; padding: 0 3px; }
+
+/* recorder */
+.regua, .pista { display: grid; grid-template-columns: 130px minmax(0, 1fr); align-items: center; }
+.regua .ticks { display: flex; justify-content: space-between; opacity: .7; }
+.pista { margin-top: 6px; }
+.pista .lbl { color: var(--cga-amarelo); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 6px; }
+.faixa { position: relative; height: 1.6em; background: #000; border: 1px solid #333; overflow: hidden; }
+.clip { position: absolute; top: 2px; bottom: 2px; padding: 0 3px; color: #fff; overflow: hidden; white-space: nowrap; font-size: .85em; box-shadow: 1px 1px 0 #000; }
+.agulha { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--cga-vermelho); box-shadow: 0 0 6px var(--cga-vermelho); }
+.transporte { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.transporte button { background: #222; color: #fff; padding: 0 8px; box-shadow: 3px 3px 0 #000; }
+.transporte .rec { background: #AA0000; }
+.transporte .aovivo { background: #00AA00; }
+.mesa { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; }
+.canal { display: grid; justify-items: center; gap: 3px; }
+.vu { width: 20px; height: 84px; background: #111; display: flex; flex-direction: column-reverse; gap: 2px; padding: 2px; border: 1px solid #333; }
+.vu i { display: block; height: 6px; background: #222; }
+.canal small { max-width: 9ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* scripts */
+.scr { display: grid; grid-template-columns: minmax(180px, 260px) minmax(0, 1fr); gap: 14px; }
+.lista { background: var(--cga-cinza); padding: 8px; border: 3px double #000; align-self: start; }
+.lista button { display: flex; justify-content: space-between; gap: 6px; width: calc(100% - 8px); margin: 0 8px 7px 0; padding: 0 6px; box-shadow: 5px 4px 0 #000; color: #fff; background: var(--cga-azul); text-align: left; }
+.lista button.sel { background: var(--cga-ciano); color: #000; }
+.lista button .r { color: var(--cga-amarelo); }
+.lista .hist { margin-top: 8px; color: #000; }
+.lista .hist button { background: #555; }
+.saida { background: #000; color: #ccc; border: 1px solid #333; padding: 6px 8px; height: 220px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+.saida .etapa { color: var(--cga-amarelo); } .saida .bom { color: var(--cga-verde); } .saida .ruim { color: var(--cga-vermelho); } .saida .eu { color: #55FFFF; }
+.regua-scr { margin-top: 6px; white-space: nowrap; overflow: hidden; }
+.acoes { margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.acoes input { font: inherit; background: #000; color: #fff; border: 3px double #fff; padding: 0 8px; min-width: 200px; flex: 1; }
+.acoes button { padding: 0 10px; box-shadow: 4px 3px 0 #000; color: #fff; }
+.b-rodar { background: #00AA00; } .b-parar { background: #AA0000; } .b-limpar { background: #555; } .b-enviar { background: var(--cga-azul); }
+.estado-scr { margin-top: 4px; opacity: .85; }
+
+/* machine */
+.cartoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.cartao { background: var(--cga-azul); color: #fff; border: 3px double #fff; padding: 4px 10px 8px; box-shadow: 7px 6px 0 #000; }
+.cartao h4 { margin: 0 0 4px; font-weight: normal; background: var(--cga-cinza); color: #000; padding: 0 6px; }
+.lin { display: grid; grid-template-columns: 74px minmax(0, 1fr) 52px; gap: 6px; align-items: center; }
+.barra { white-space: nowrap; overflow: hidden; letter-spacing: -1px; }
+.grande { font-size: 2em; color: var(--cga-amarelo); line-height: 1.1; }
+.alerta { animation: pisca 1s steps(1) infinite; }
+@keyframes pisca { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .alerta { animation: none; } }
+
+/* context */
+.cadeia { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding: 4px 0 8px; }
+.cadeia .no { min-width: 150px; }
+.elo { color: var(--cga-laranja); white-space: nowrap; }
+
+/* map + console */
+/* Width split (wide, short panel): tree 40%, arcade at the 16:9 proportion of the panel height
+   (at most 30% of the width), printer with the rest (minimum 260 px). The map shrinks before the printer
+   goes past the panel, so there is no horizontal scroll. --mk-h and --jogo-w are used by monitor-mapa.css. */
+.mapa-cons { --mk-h: max(200px, calc(100vh - 64px));
+  --jogo-w: min(calc((var(--mk-h) - 26px) * 16 / 9 + 6px), 30vw);
+  --mapa-w: calc(40vw + var(--jogo-w) + 8px);
+  display: grid; grid-template-columns: minmax(0, var(--mapa-w)) minmax(260px, 1fr); gap: 12px; min-height: 230px; }
+/* Radar: square screen + flight strips + arcade (up to 24% of the width) */
+.mapa-cons:has(.mock-radar) { --jogo-w: min(calc((var(--mk-h) - 26px) * 16 / 9 + 6px), 24vw);
+  --mapa-w: calc(min(var(--mk-h), 26vw) + clamp(190px, 24vw, 520px) + var(--jogo-w) + 16px); }
+/* 80s views (signal box, teletext, circuit board): the drawing is 1300x420; the column gets the width the panel height
+   allows (no black band above and below), up to 58% of the screen; the printer keeps the rest (min. 260px) */
+.mapa-cons:has(.mock-a80) { --mapa-w: calc(min(var(--mk-h) * 1300 / 420, 58vw) + var(--jogo-w) + 8px); }
+/* Arcade window in the Map = Hidden: the game area goes away and the map takes its space (the preview in the Settings tab stays) */
+body[data-arcade=hidden] .mapa-cons { --jogo-w: 0px; }
+body[data-arcade=hidden] .mapa-cons .mock .jogo { display: none; }
+@media (max-width: 760px) { .mapa-cons { grid-template-columns: minmax(0, 1fr); } }
+.mapa-area { position: relative; min-height: 230px; min-width: 0; }
+.ef-menu { margin-bottom: 8px; }
+.ef-menu select { font: inherit; background: var(--cga-azul); color: #fff; border: 0; box-shadow: 3px 3px 0 #000; }
+.ef-menu button { padding: 0 8px; color: #fff; box-shadow: 3px 3px 0 #000; }
+.cons { background: #000; border: 1px solid #333; display: flex; flex-direction: column; min-width: 0; max-height: 300px; }
+.cons-barra { display: flex; flex-wrap: wrap; gap: 4px; background: var(--cga-cinza); padding: 2px 4px; }
+.cons-barra button { background: #555; color: #fff; padding: 0 6px; }
+.cons-barra button.on { background: var(--cga-azul); }
+.cons-linhas { overflow: auto; padding: 4px 6px; flex: 1; }
+.cln { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #AAAAAA; line-height: 1.4em; }
+.cln.c-ferr { color: #55FFFF; } .cln.c-claude { color: #AAAAAA; } .cln.c-aviso { color: #FFAA00; }
+
+/* console = dot-matrix printer, like the prototype: VT323 font (OFL, embedded), continuous form
+   zebra-striped with 22 px stripes, margins with little holes, head that runs along with the printed letter */
+@font-face { font-family: "VT323"; src: url("VT323-Regular.ttf") format("truetype"); font-display: block; }
+.cabeca { position: relative; height: 8px; background: #333; z-index: 3; }
+.cabeca .agulha { position: absolute; top: -4px; left: 0; width: 26px; height: 16px; background: #aaa; border: 2px solid #000; }
+.formulario { font-family: "VT323", "PxPlus IBM VGA 8x16", monospace; font-size: 18px; line-height: 22px; color: var(--m-pt, #222);
+              padding: 0 28px !important;
+              background:
+                radial-gradient(circle at 9px 11px, var(--m-furo, #999) 4px, transparent 5px) left top / 18px 22px repeat-y local,
+                radial-gradient(circle at 9px 11px, var(--m-furo, #999) 4px, transparent 5px) right top / 18px 22px repeat-y local,
+                linear-gradient(90deg, var(--m-p1, #eee) 0 18px, transparent 18px calc(100% - 18px), var(--m-p1, #eee) calc(100% - 18px)) local,
+                repeating-linear-gradient(180deg, var(--m-p1, #f4f8f0) 0 22px, var(--m-p2, #d6ecd2) 22px 44px) local; }
+/* the paper comes out from below: the lines are anchored at the end and each new line pushes the paper up.
+   Height in an exact multiple of 22 px so the stripes match the lines; scrolling follows the mouse wheel. */
+.cons-linhas.formulario { flex: none; height: 242px; display: flex; flex-direction: column; overflow-y: auto; scrollbar-width: none; }
+.cons-linhas.formulario::-webkit-scrollbar { display: none; }
+.formulario .cln:first-child { margin-top: auto; }
+.formulario .cln { flex: none; font: inherit; line-height: 22px; white-space: pre; overflow: hidden; text-overflow: clip; color: var(--m-pt, #222); font-weight: normal; }
+.formulario .cln.c-claude { color: #444; }
+.formulario .cln.c-aviso { color: #B00000; }
+/* dark ink on the whole line; color only on the tool name and on ERROR */
+.formulario .tk-Read { color: var(--m-a0, #8A4B00); }
+.formulario .tk-Edit, .formulario .tk-Write, .formulario .tk-NotebookEdit { color: var(--m-a1, #0A7A0A); }
+.formulario .tk-Bash, .formulario .tk-PowerShell { color: var(--m-a2, #0033AA); }
+.formulario .tk-Grep, .formulario .tk-Glob { color: var(--m-a3, #6A1B9A); }
+.formulario .tk-Agent, .formulario .tk-Task { color: var(--m-a4, #A0007A); }
+.formulario .tk-WebFetch, .formulario .tk-WebSearch { color: var(--m-a5, #006F7A); }
+.formulario .tk-outra { color: #444; }
+.formulario .tk-erro { color: #B00000; }
+.formulario .cln.corte { color: var(--m-pt, #222); }
+.cursor { color: var(--m-pt, #222); animation: pisca 1s steps(1) infinite; }
+body[data-forma=fosforo] .formulario .cln span { color: var(--m-dest) !important; }
+body[data-forma=fosforo] .formulario { text-shadow: 0 0 5px var(--m-pt); }
+[hidden] { display: none !important; }
+
+/* maze paths: double corridor with dots; a muncher runs along the corridor */
+/* A single corridor, from the session to the branching point; with a single block on the right it goes straight. */
+.fio { position: relative; height: 16px; margin-right: 14px; overflow: hidden;
+       border-top: 3px double #0000AA; border-bottom: 3px double #0000AA;
+       background: radial-gradient(circle, #FFFF55 2px, transparent 3px) 4px 50% / 12px 8px repeat-x; }
+.mapa:has(.filhos > .filho:only-child) .fio { margin-right: 0; }
+/* Maze Muncher conveyor, below the map: dashed rail and the mouth fixed at the end */
+.esteira { position: relative; height: 32px; margin-top: 14px; }
+.esteira .trilho { position: absolute; left: 0; right: 40px; top: 15px; border-top: 2px dashed #0000AA; }
+.boca-fixa { position: absolute; right: 4px; top: -2px; width: 34px; text-align: center; color: var(--cga-amarelo); font-size: 2em; line-height: 1; text-shadow: 2px 2px 0 #000; }
+/* block well: 10 x 12 cells of 16 px, to the right of the map */
+.poco { position: absolute; right: 8px; top: 34px; z-index: 3; display: flex; gap: 10px; align-items: flex-start; }
+.mapa-area:has(#poco:not([hidden])) #mapa-corpo { margin-right: 270px; overflow: hidden; }
+.mapa-area:has(#poco:not([hidden])) { min-height: 275px; }
+.poco-cx.placar3 > div:not(.poco-tit) { color: var(--cga-verde); }
+.poco-fundo { position: relative; width: 140px; height: 224px; background: #000; border: 3px double #fff; box-shadow: 6px 6px 0 #000; overflow: hidden;
+              background-image: linear-gradient(#141414 1px, transparent 1px), linear-gradient(90deg, #141414 1px, transparent 1px); background-size: 14px 14px; }
+.poco-pilha, .peca-grupo { position: absolute; inset: 0; }
+.peca-grupo { z-index: 2; }
+.cel { position: absolute; box-shadow: inset -2px -2px 0 rgba(0,0,0,.45), inset 2px 2px 0 rgba(255,255,255,.35); }
+.cel.cheia { background: #fff !important; animation: pisca .15s steps(1) 3; }
+.cel.cinza { background: #777; }
+.poco-lado { display: grid; gap: 6px; width: 84px; }
+.poco-cx { background: #000; color: #fff; border: 2px solid #fff; box-shadow: 3px 3px 0 #000; padding: 1px 4px; text-align: center; }
+.poco-tit { color: var(--cga-amarelo); font-size: .85em; }
+.poco-cx > div:not(.poco-tit):not(.poco-prox) { color: var(--cga-verde); }
+.poco-prox { position: relative; width: 60px; height: 54px; margin: 2px auto; }
+.poco-nome { font-size: .85em; }
+.placar-fixo { background: #000; color: var(--cga-verde); padding: 0 6px; margin-left: 8px; }
+/* vertical spine connecting the centers of the blocks and a short branch to each block */
+.filho:not(:only-child)::after { content: ""; position: absolute; left: -14px; top: -6px; bottom: -6px; border-left: 3px double #0000AA; }
+.filho:first-child:not(:only-child)::after { top: 50%; }
+.filho:last-child:not(:only-child)::after { bottom: 50%; }
+.filho:not(:only-child)::before { content: ""; position: absolute; left: -14px; top: 50%; width: 14px; border-top: 3px double #0000AA; }
+
+/* effects */
+.fx { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.voo { position: absolute; z-index: 5; }
+.part { position: absolute; z-index: 6; }
+.boca { position: absolute; z-index: 6; color: var(--cga-amarelo); font-size: 2em; line-height: 1; }
+.placar { position: absolute; right: 6px; top: 0; background: #000; color: var(--cga-verde); padding: 0 6px; }
+.lixo { position: absolute; right: 18px; bottom: 6px; width: 56px; height: 84px; }
+.lixo canvas { position: absolute; left: 0; bottom: 44px; width: 56px; height: 48px; image-rendering: pixelated; }
+.lixo .lata { position: absolute; left: 4px; right: 4px; bottom: 0; height: 46px; border: 3px solid #000; background: repeating-linear-gradient(90deg, #666 0 8px, #444 8px 11px); }
+.papel { position: absolute; right: 8px; bottom: 6px; width: 62%; max-width: 420px; background: repeating-linear-gradient(180deg, #f4f8f0 0 1.3em, #d6ecd2 1.3em 2.6em); color: #222; padding: 2px 10px; border-left: 10px dotted #bbb; border-right: 10px dotted #bbb; }
+.papel .pl div { white-space: pre; overflow: hidden; }
+
+/* task pop-up */
+.pop { position: fixed; left: 50%; top: 45%; width: min(380px, 90vw); transform: translate(-50%, -50%) scale(0); background: var(--cga-azul); color: #fff; border: 3px double #fff; box-shadow: 10px 9px 0 #000; z-index: 20; transition: transform .35s steps(6); }
+.pop.aberta { transform: translate(-50%, -50%) scale(1); }
+.pop-t { display: flex; justify-content: space-between; background: var(--cga-cinza); color: #000; padding: 0 8px; }
+.pop-c { padding: 6px 10px 10px; }
+.pop-a { color: var(--cga-amarelo); }
+.pop-d { opacity: .85; margin: 4px 0; }
+.carimbo { position: absolute; right: 12px; bottom: 8px; color: var(--cga-verde); border: 3px solid var(--cga-verde); padding: 0 6px; transform: rotate(-12deg); }
+.filapop { position: fixed; right: 10px; top: 40px; display: grid; gap: 4px; z-index: 19; }
+.filapop div { background: var(--cga-azul); color: #fff; padding: 0 6px; box-shadow: 3px 3px 0 #000; }
+.filapop div.feito { background: #00AA00; }
+
+/* Settings tab */
+.cfg { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; padding: 6px 8px 10px; align-items: start; }
+.cfg select, .cfg button { font: inherit; }
+.cfg select { background: var(--cga-azul); color: #fff; border: 0; box-shadow: 3px 3px 0 #000; padding: 0 4px; }
+.cfg-vis { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px; }
+.cfg-vis .vis { background: var(--cga-azul); color: #fff; text-align: left; padding: 0 8px; box-shadow: 3px 3px 0 #000; }
+.cfg-vis .vis .k { color: var(--cga-amarelo); }
+.cfg-vis .vis.on { background: var(--cga-verde); color: #000; } .cfg-vis .vis.on .k { color: #000; }
+.cfg-linha { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin-top: 8px; }
+.cfg-linha button { background: #555; color: #fff; padding: 0 8px; box-shadow: 3px 3px 0 #000; }
+.cfg-linha button.on { background: var(--cga-verde); color: #000; }
+.cfg-linha button.b-rodar { background: #00AA00; }
+.cfg-nota { opacity: .85; margin-top: 8px; font-size: .92em; }
+.cfg-cmd { margin-top: 6px; line-height: 1.6; } .cfg-cmd b { color: var(--cga-amarelo); font-weight: normal; }
+.cfg-janela { margin-top: 10px; max-width: 420px; }
+.cfg-janela .fxwin { position: static; width: auto; opacity: 1 !important; }
+
+/* version mark at the end of the tab bar (variant 1 of the 2026-11-22-aba-sobre.html mockup) */
+.marca { flex: 0 0 auto; white-space: nowrap; font-size: .8em; opacity: .62; margin-left: 14px; letter-spacing: .5px; align-self: center; }
+.marca b { font-weight: normal; color: var(--cga-amarelo); }
+@media (max-width: 1600px) { .marca .longo { display: none; } .marca { font-size: .72em; margin-left: 6px; letter-spacing: 0; } }
+@media (min-width: 1601px) { .marca .curto { display: none; } }
+
+/* About tab: BIOS SYSTEM INFO (proposal C, approved) */
+.pc { display: flex; flex-direction: column; height: calc(100vh - 60px); min-height: 220px; }
+.bios-cab { text-align: center; color: var(--cga-amarelo); white-space: nowrap; overflow: hidden; }
+.bios-cab small { color: var(--cga-ciano); font-size: .92em; }
+.bios { flex: 1 1 auto; border: 4px double #fff; margin: 4px 0; display: grid; grid-template-columns: 1fr 1fr 1fr; min-height: 0; }
+.bios > div { padding: 4px 14px; border-right: 2px solid #fff; min-width: 0; overflow: hidden; }
+.bios > div:last-child { border-right: 0; }
+.bios h3 { margin: 0 0 2px; font-weight: normal; color: var(--cga-ciano); white-space: nowrap; font-size: 1em; }
+.kv { display: flex; white-space: nowrap; }
+.kv .k { color: #fff; }
+.kv .pt { flex: 1 1 auto; overflow: hidden; color: #5555FF; margin: 0 6px; }
+.kv .pt::after { content: '..................................................................................................................................'; }
+.kv .v { color: var(--cga-amarelo); }
+.kv .e { margin-left: 10px; min-width: 4ch; }
+.pc .ok { color: var(--cga-verde); } .pc .av { color: var(--cga-amarelo); } .pc .apag { opacity: .6; }
+.pc .linha { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bios-pe { display: flex; gap: 28px; background: var(--cga-cinza); color: #000; padding: 0 10px; white-space: nowrap; overflow: hidden; }
+.bios-pe b { font-weight: normal; color: var(--cga-vermelho); text-shadow: 1px 1px 0 #000; }
+.bios-pe [data-doc], .bios-pe [data-f10] { cursor: pointer; }
+.bios-pe .dir { margin-left: auto; color: #0000AA; }
+@media (max-width: 1600px) {
+  .bios { grid-template-columns: 1fr 1fr; }
+  .bios > div.c3 { display: none; }
+  .bios > div.c2 { border-right: 0; }
+  .bios-pe .sum { display: none; }
+}
+
+/* "?" help: variant C of the .code/prototipos/2026-11-22-console-ingles-ajuda.html mockup (Clipper F1 help screen:
+   black on cyan, black title bar, blue button). ajuda-* classes because .pop is already the task pop-up.
+   Colors: in the shapes without a CGA palette they come from the active theme variables (--m-*, written by monitor-mapa.js);
+   in the Manifest shape (CGA visuals) and before the theme arrives, the mockup colors stay. */
+:root { --h-fundo: #00aaaa; --h-tinta: #000000; --h-bt: #0000aa; --h-bt-t: #ffffff; --h-alto: #ffffff; --h-foco: #ffff55; }
+body[data-forma=norton], body[data-forma=lotus] { --h-fundo: var(--m-barra); --h-tinta: var(--m-barra-t); --h-bt: var(--m-painel); --h-bt-t: var(--m-tp); --h-alto: var(--m-tinta); --h-foco: var(--m-dest); }
+body[data-forma=fosforo] { --h-fundo: var(--m-tinta); --h-tinta: var(--m-tela); --h-bt: var(--m-painel); --h-bt-t: var(--m-tinta); --h-alto: var(--m-dest); --h-foco: var(--m-dest); }
+/* active M80 visual with a CGA palette (Clipper, Turbo, Norton, LapLink, Manifest; marked by monitor-tela.js): mockup colors */
+body[data-cga="1"][data-forma] { --h-fundo: #00aaaa; --h-tinta: #000000; --h-bt: #0000aa; --h-bt-t: #ffffff; --h-alto: #ffffff; --h-foco: #ffff55; }
+button.q[data-h] { font: inherit; line-height: 1; background: var(--h-fundo); color: var(--h-tinta); border: 0; padding: 0 6px; cursor: pointer; box-shadow: none; }
+button.q[data-h]:hover { background: var(--h-alto); }
+button.q[data-h]:focus-visible, .ajuda-pop button:focus-visible { outline: 2px solid var(--h-foco); outline-offset: 2px; }
+.q-mapa { position: absolute; top: 0; right: 0; z-index: 4; }
+.ajuda-veu { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.35); z-index: 30; }
+.ajuda-veu[hidden] { display: none; }
+.ajuda-pop { width: min(520px, 90%); display: grid; gap: 10px; padding: 12px 16px 14px; box-shadow: 12px 10px 0 #000; }
+.ajuda-pop .t { text-align: center; }
+.ajuda-pop p { margin: 0; max-width: none; font-size: 1.05em; line-height: 1.1; }
+.ajuda-pop .bt { justify-self: center; font: inherit; line-height: 1; border: 0; padding: 2px 14px; cursor: pointer; }
+.ajuda-pop.c { background: var(--h-fundo); color: var(--h-tinta); border: 2px solid var(--h-tinta); padding-top: 0; }
+.ajuda-pop.c .t { background: var(--h-tinta); color: var(--h-fundo); margin: 0 -16px; padding: 2px 0; }
+.ajuda-pop.c .bt { background: var(--h-bt); color: var(--h-bt-t); }
+
+/* ---- skin of the current themes: colors, frames and buttons follow the VS Code theme; appearance only, nothing functional ---- */
+body[data-moderno="1"] {
+  --mo-card: color-mix(in srgb, var(--vscode-editor-background) 80%, var(--vscode-list-activeSelectionBackground, #555));
+  --mo-bd: var(--vscode-widget-border, var(--vscode-panel-border, #555));
+  --mo-ac: var(--vscode-statusBar-background, var(--vscode-focusBorder));
+  --mo-acf: var(--vscode-statusBar-foreground, #000);
+  --mo-tx: var(--vscode-editor-foreground);
+  --mo-tit: var(--vscode-titleBar-activeBackground, var(--mo-card));
+  --mo-titf: var(--vscode-titleBar-activeForeground, var(--mo-tx));
+  --mo-dest: var(--vscode-focusBorder, var(--mo-ac));
+  --cga-amarelo: var(--mo-dest); --cga-ciano: var(--mo-dest);
+}
+body[data-moderno="1"] :is(.abas button, .lista button, .cfg-vis .vis, .cfg-linha button, .acoes button, .transporte button, .ef-menu button, .cons-barra button, .b-limpar, .b-enviar, .teclas b, .cfg select, .ef-menu select, .filapop div) {
+  background: var(--mo-card); color: var(--mo-tx); box-shadow: none; border: 1px solid var(--mo-bd); border-radius: 6px; }
+body[data-moderno="1"] :is(.abas button .k, .lista button .r, .cfg-vis .vis .k, .cfg-cmd b) { color: var(--mo-dest); }
+body[data-moderno="1"] :is(.abas button.on, .lista button.sel, .cfg-vis .vis.on, .cfg-linha button.on, .cons-barra button.on) { background: var(--mo-ac); color: var(--mo-acf); border-color: var(--mo-ac); }
+body[data-moderno="1"] :is(.abas button.on .k, .cfg-vis .vis.on .k) { color: var(--mo-acf); }
+body[data-moderno="1"] .abas button.alerta { background: #AA0000; color: #fff; }
+body[data-moderno="1"] :is(.no, .cartao, .pop, .detalhe, .lista) { background: var(--mo-card); color: var(--mo-tx); border: 1px solid var(--mo-bd); border-radius: 8px; box-shadow: none; }
+body[data-moderno="1"] .no.principal { border-color: var(--mo-dest); }
+body[data-moderno="1"] .no .t { color: var(--mo-dest); }
+body[data-moderno="1"] .no .a { color: var(--vscode-textLink-foreground, var(--mo-dest)); }
+body[data-moderno="1"] .no.feito { background: var(--vscode-editor-background); border-color: var(--mo-bd); }
+body[data-moderno="1"] .no.feito .t { color: var(--vscode-descriptionForeground, var(--mo-tx)); }
+body[data-moderno="1"] :is(.cartao h4, .pop-t) { background: var(--mo-tit); color: var(--mo-titf); border-radius: 6px 6px 0 0; }
+body[data-moderno="1"] .jobs th { background: var(--mo-tit); color: var(--mo-titf); }
+body[data-moderno="1"] .jobs tr.sel td { background: var(--mo-ac); color: var(--mo-acf); }
+body[data-moderno="1"] .cons-barra { background: var(--mo-tit); }
+body[data-moderno="1"] .cartao .grande, body[data-moderno="1"] .pop-a { color: var(--mo-dest); }
+body[data-moderno="1"] .acoes input { background: var(--vscode-input-background, var(--mo-card)); color: var(--vscode-input-foreground, var(--mo-tx)); border: 1px solid var(--mo-bd); border-radius: 6px; }
+body[data-moderno="1"] .ferr { box-shadow: none; border-radius: 4px; }
+body[data-moderno="1"] .lista .hist button { background: var(--mo-card); }
+body[data-moderno="1"] { --h-fundo: var(--mo-ac); --h-tinta: var(--mo-acf); --h-alto: var(--mo-dest); --h-foco: var(--mo-dest); --h-bt: var(--mo-ac); --h-bt-t: var(--mo-acf); }
+body[data-moderno="1"] button.q[data-h] { border-radius: 4px; }
+body[data-moderno="1"] .ajuda-pop { box-shadow: none; border: 1px solid var(--mo-bd); border-radius: 8px; background: var(--mo-card); color: var(--mo-tx); }
+/* Recorder and outputs in the current themes: appearance only */
+body[data-moderno="1"] .pista .lbl { color: var(--mo-dest); }
+body[data-moderno="1"] .faixa { background: var(--vscode-editor-background); border: 1px solid var(--mo-bd); border-radius: 4px; }
+body[data-moderno="1"] .vu { background: var(--vscode-editor-background); border: 1px solid var(--mo-bd); border-radius: 4px; }
+body[data-moderno="1"] .vu i { background: var(--mo-card); }
+body[data-moderno="1"] .transporte button { box-shadow: none; }
+body[data-moderno="1"] .transporte .rec { background: #B3261E; color: #fff; border-color: #B3261E; }
+body[data-moderno="1"] .transporte .aovivo { background: var(--mo-ac); color: var(--mo-acf); border-color: var(--mo-ac); }
+body[data-moderno="1"] :is(.saida, .cons) { background: var(--vscode-editor-background); color: var(--mo-tx); border: 1px solid var(--mo-bd); border-radius: 6px; }
+body[data-moderno="1"] .cln, body[data-moderno="1"] .cln.c-claude { color: var(--vscode-descriptionForeground, var(--mo-tx)); }
+body[data-moderno="1"] .saida .etapa { color: var(--mo-dest); }
+/* log console in the current themes: no printer paper; theme background, text and ink. Same lines and filters.
+   Tools keep the same color family (Read amber, Edit green, Bash blue, Grep purple, Agent red, Web cyan),
+   in the readable tone of the terminal of the theme itself. */
+body[data-moderno="1"] .cabeca { display: none; }
+body[data-moderno="1"] .formulario { font-family: var(--vscode-editor-font-family); font-size: var(--vscode-editor-font-size); padding: 0 10px !important;
+  background: var(--vscode-editor-background); color: var(--mo-tx); text-shadow: none; }
+body[data-moderno="1"] .formulario .cln, body[data-moderno="1"] .formulario .cln.corte, body[data-moderno="1"] .cursor { color: var(--mo-tx); }
+body[data-moderno="1"] .formulario .cln.c-claude, body[data-moderno="1"] .formulario .tk-outra { color: var(--vscode-descriptionForeground, var(--mo-tx)); }
+body[data-moderno="1"] .formulario .cln.c-aviso, body[data-moderno="1"] .formulario .tk-erro { color: var(--vscode-terminal-ansiRed, #FF6B6B); }
+body[data-moderno="1"] .formulario .tk-Read { color: color-mix(in srgb, var(--vscode-terminal-ansiYellow) 85%, var(--mo-tx)); }
+body[data-moderno="1"] .formulario :is(.tk-Edit, .tk-Write, .tk-NotebookEdit) { color: color-mix(in srgb, var(--vscode-terminal-ansiGreen) 85%, var(--mo-tx)); }
+body[data-moderno="1"] .formulario :is(.tk-Bash, .tk-PowerShell) { color: color-mix(in srgb, var(--vscode-terminal-ansiBlue) 85%, var(--mo-tx)); }
+body[data-moderno="1"] .formulario :is(.tk-Grep, .tk-Glob) { color: color-mix(in srgb, var(--vscode-terminal-ansiMagenta) 85%, var(--mo-tx)); }
+body[data-moderno="1"] .formulario :is(.tk-Agent, .tk-Task) { color: color-mix(in srgb, var(--vscode-terminal-ansiRed) 85%, var(--mo-tx)); }
+body[data-moderno="1"] .formulario :is(.tk-WebFetch, .tk-WebSearch) { color: color-mix(in srgb, var(--vscode-terminal-ansiCyan) 85%, var(--mo-tx)); }
+body[data-moderno="1"] .formulario .cln { text-overflow: ellipsis; }
+body[data-moderno="1"] .cons-barra { background: var(--vscode-editor-background); }

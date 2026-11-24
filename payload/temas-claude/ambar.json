@@ -1,0 +1,19 @@
+{
+  "name": "Ambar dBase",
+  "base": "dark",
+  "overrides": {
+    "claude": "#FFB000",
+    "text": "#FFB000",
+    "inactive": "#A06A00",
+    "subtle": "#A06A00",
+    "promptBorder": "#FFB000",
+    "permission": "#FFD966",
+    "suggestion": "#FFD966",
+    "success": "#FFD966",
+    "error": "#FF5555",
+    "warning": "#FFCC33",
+    "diffAdded": "#FFD966",
+    "diffRemoved": "#FF5555",
+    "userMessageBackground": "#1A1000"
+  }
+}

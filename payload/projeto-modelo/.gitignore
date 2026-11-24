@@ -1,0 +1,30 @@
+# Generated sessions and logs
+.sessions/raw/
+.sessions/scripts/
+*.log
+
+# Secrets: NEVER commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+.claude/settings.local.json
+
+# Generated
+node_modules/
+__pycache__/
+*.pyc
+*.vsix
+*.tmp
+*.bak
+*.swp
+*~
+
+# System
+.DS_Store
+Thumbs.db
+
+# M80 Monitor live state (written by m80-motor)
+.sessions/m80-ao-vivo.json

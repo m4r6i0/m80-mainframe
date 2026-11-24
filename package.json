@@ -1,0 +1,497 @@
+{
+  "name": "m80-mainframe",
+  "displayName": "M80 Mainframe",
+  "description": "Retro 80s and modern VS Code themes, a live console for Claude Code (map, arcade, costs, context) and a one-click installer for the M80 Claude Code components. Windows.",
+  "version": "1.17.5",
+  "publisher": "m80",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#0a0f0a",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/m4r6i0/m80-mainframe.git"
+  },
+  "homepage": "https://github.com/m4r6i0/m80-mainframe#readme",
+  "bugs": {
+    "url": "https://github.com/m4r6i0/m80-mainframe/issues"
+  },
+  "keywords": [
+    "theme",
+    "retro",
+    "claude",
+    "claude-code",
+    "console",
+    "dashboard",
+    "monitor",
+    "vga",
+    "crt"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Themes",
+    "Visualization",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "themes": [
+      {
+        "label": "M80 Clipper Summer 87",
+        "uiTheme": "vs-dark",
+        "path": "./themes/clipper.json"
+      },
+      {
+        "label": "M80 Turbo Pascal 7",
+        "uiTheme": "vs-dark",
+        "path": "./themes/turbo.json"
+      },
+      {
+        "label": "M80 Norton Commander 5",
+        "uiTheme": "vs-dark",
+        "path": "./themes/norton.json"
+      },
+      {
+        "label": "M80 Green Phosphor 5151",
+        "uiTheme": "vs-dark",
+        "path": "./themes/fosforo.json"
+      },
+      {
+        "label": "M80 dBase III Amber",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ambar.json"
+      },
+      {
+        "label": "M80 LapLink White Paper",
+        "uiTheme": "vs",
+        "path": "./themes/laplink.json"
+      },
+      {
+        "label": "M80 Quarterdeck Manifest",
+        "uiTheme": "vs-dark",
+        "path": "./themes/manifest.json"
+      },
+      {
+        "label": "M80 Graphite",
+        "uiTheme": "vs-dark",
+        "path": "./themes/graphite.json"
+      },
+      {
+        "label": "M80 Midnight",
+        "uiTheme": "vs-dark",
+        "path": "./themes/midnight.json"
+      },
+      {
+        "label": "M80 Daylight",
+        "uiTheme": "vs",
+        "path": "./themes/daylight.json"
+      },
+      {
+        "label": "M80 Porcelain",
+        "uiTheme": "vs",
+        "path": "./themes/porcelain.json"
+      },
+      {
+        "label": "M80 Forest",
+        "uiTheme": "vs-dark",
+        "path": "./themes/forest.json"
+      },
+      {
+        "label": "M80 Dusk",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dusk.json"
+      },
+      {
+        "label": "M80 Ember",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ember.json"
+      },
+      {
+        "label": "M80 Ocean",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ocean.json"
+      },
+      {
+        "label": "M80 Contrast",
+        "uiTheme": "vs-dark",
+        "path": "./themes/contrast.json"
+      },
+      {
+        "label": "M80 Mist",
+        "uiTheme": "vs",
+        "path": "./themes/mist.json"
+      },
+      {
+        "label": "M80 Clipper Summer 87 Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/clipper-suave.json"
+      },
+      {
+        "label": "M80 Turbo Pascal 7 Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/turbo-suave.json"
+      },
+      {
+        "label": "M80 Norton Commander 5 Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/norton-suave.json"
+      },
+      {
+        "label": "M80 Green Phosphor 5151 Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/fosforo-suave.json"
+      },
+      {
+        "label": "M80 dBase III Amber Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ambar-suave.json"
+      },
+      {
+        "label": "M80 LapLink White Paper Soft",
+        "uiTheme": "vs",
+        "path": "./themes/laplink-suave.json"
+      },
+      {
+        "label": "M80 Quarterdeck Manifest Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/manifest-suave.json"
+      },
+      {
+        "label": "M80 Graphite Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/graphite-suave.json"
+      },
+      {
+        "label": "M80 Midnight Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/midnight-suave.json"
+      },
+      {
+        "label": "M80 Daylight Soft",
+        "uiTheme": "vs",
+        "path": "./themes/daylight-suave.json"
+      },
+      {
+        "label": "M80 Porcelain Soft",
+        "uiTheme": "vs",
+        "path": "./themes/porcelain-suave.json"
+      },
+      {
+        "label": "M80 Forest Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/forest-suave.json"
+      },
+      {
+        "label": "M80 Dusk Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dusk-suave.json"
+      },
+      {
+        "label": "M80 Ember Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ember-suave.json"
+      },
+      {
+        "label": "M80 Ocean Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/ocean-suave.json"
+      },
+      {
+        "label": "M80 Contrast Soft",
+        "uiTheme": "vs-dark",
+        "path": "./themes/contrast-suave.json"
+      },
+      {
+        "label": "M80 Mist Soft",
+        "uiTheme": "vs",
+        "path": "./themes/mist-suave.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "m80.trocarVisual",
+        "title": "M80: Switch look"
+      },
+      {
+        "command": "m80.proximoVisual",
+        "title": "M80: Next look"
+      },
+      {
+        "command": "m80.alternarSuave",
+        "title": "M80: Toggle original / soft"
+      },
+      {
+        "command": "m80.instalar",
+        "title": "M80: Install or update components"
+      },
+      {
+        "command": "m80.desinstalar",
+        "title": "M80: Uninstall components"
+      },
+      {
+        "command": "m80.visual.clipper",
+        "title": "M80: Look F1 Clipper Summer 87"
+      },
+      {
+        "command": "m80.visual.turbo",
+        "title": "M80: Look F2 Turbo Pascal 7"
+      },
+      {
+        "command": "m80.visual.norton",
+        "title": "M80: Look F3 Norton Commander 5"
+      },
+      {
+        "command": "m80.visual.fosforo",
+        "title": "M80: Look F4 Green Phosphor"
+      },
+      {
+        "command": "m80.visual.ambar",
+        "title": "M80: Look F5 dBase Amber"
+      },
+      {
+        "command": "m80.visual.laplink",
+        "title": "M80: Look F6 LapLink"
+      },
+      {
+        "command": "m80.visual.manifest",
+        "title": "M80: Look F7 Quarterdeck Manifest"
+      },
+      {
+        "command": "m80.abrirMenu",
+        "title": "M80: Open menu"
+      },
+      {
+        "command": "m80.abrirMonitor",
+        "title": "M80: Open Console"
+      },
+      {
+        "command": "m80.rotacionar",
+        "title": "M80: Rotate to a new conversation"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "m80.trocarVisual",
+        "key": "ctrl+alt+f9"
+      },
+      {
+        "command": "m80.visual.clipper",
+        "key": "ctrl+alt+f1"
+      },
+      {
+        "command": "m80.visual.turbo",
+        "key": "ctrl+alt+f2"
+      },
+      {
+        "command": "m80.visual.norton",
+        "key": "ctrl+alt+f3"
+      },
+      {
+        "command": "m80.visual.fosforo",
+        "key": "ctrl+alt+f4"
+      },
+      {
+        "command": "m80.visual.ambar",
+        "key": "ctrl+alt+f5"
+      },
+      {
+        "command": "m80.visual.laplink",
+        "key": "ctrl+alt+f6"
+      },
+      {
+        "command": "m80.alternarSuave",
+        "key": "ctrl+alt+f10"
+      },
+      {
+        "command": "m80.visual.manifest",
+        "key": "ctrl+alt+f7"
+      },
+      {
+        "command": "m80.abrirMenu",
+        "key": "ctrl+alt+m"
+      },
+      {
+        "command": "m80.abrirMonitor",
+        "key": "ctrl+alt+o"
+      }
+    ],
+    "configuration": {
+      "title": "M80 Retro",
+      "properties": {
+        "m80.visual": {
+          "type": "string",
+          "default": "clipper",
+          "description": "Last M80 look applied (written by the extension)."
+        },
+        "m80.rotacao": {
+          "type": "string",
+          "enum": [
+            "automatica",
+            "botao"
+          ],
+          "default": "automatica",
+          "enumDescriptions": [
+            "After 85% of the context, at the next pause, opens a new conversation with the handoff card and closes the oldest one",
+            "Only rotates when you click the button in the M80 Console"
+          ],
+          "description": "How the rotation of Claude conversations happens."
+        },
+        "m80.maxConversas": {
+          "type": "number",
+          "default": 3,
+          "minimum": 2,
+          "maximum": 8,
+          "description": "How many Claude conversations stay open in tabs (the oldest is closed on rotation)."
+        },
+        "m80.efeitos.mapa": {
+          "type": "string",
+          "enum": [
+            "nenhum",
+            "lixeira",
+            "rio",
+            "enxame",
+            "keystone",
+            "kaboom",
+            "missil",
+            "selva",
+            "invasores",
+            "sapo",
+            "asteroides",
+            "pong",
+            "enduro",
+            "comilao",
+            "poco",
+            "explosao",
+            "fogos"
+          ],
+          "enumDescriptions": [
+            "None",
+            "Desk Trash",
+            "River Raid",
+            "Megamania",
+            "Keystone Kapers",
+            "Kaboom!",
+            "Missile Command",
+            "Pitfall!",
+            "Space Invaders",
+            "Frogger",
+            "Asteroids",
+            "Pong",
+            "Enduro",
+            "Pac-Man",
+            "Block Well",
+            "Blast",
+            "Fireworks Sky"
+          ],
+          "default": "lixeira",
+          "description": "Arcade window effect in the M80 Console Map when a tool finishes."
+        },
+        "m80.monitor.layout": {
+          "type": "string",
+          "enum": [
+            "sinotico",
+            "teletexto",
+            "circuito",
+            "radar"
+          ],
+          "enumDescriptions": [
+            "Signal box panel: each action is a stretch of track with lamps and a signal",
+            "Teletext page: 8 colors, mosaic graphics and double height",
+            "Circuit board: chips, 45° traces and 7-segment displays",
+            "Approach radar: the session is a flight, subagents take off, tools become fixes; flight strips on the side"
+          ],
+          "default": "sinotico",
+          "description": "Layout of the M80 Console Map tab."
+        },
+        "m80.monitor.forma": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "manifest",
+            "fosforo",
+            "lotus",
+            "norton",
+            "moderna"
+          ],
+          "enumDescriptions": [
+            "Automatic: picks from the theme colors (M80 looks have their own shape)",
+            "CGA boxes, double border, hard shadow",
+            "Glowing outlines and scan lines, monochrome",
+            "1-2-3 Spreadsheet: regions as named ranges",
+            "Commander: panels with the title in the frame",
+            "Modern: clean cards and the theme accent (used by the Modern themes)"
+          ],
+          "default": "auto",
+          "description": "Shape of the M80 Console interface. Colors always come from the active theme."
+        },
+        "m80.efeitos.animar": {
+          "type": "string",
+          "enum": [
+            "sistema",
+            "sempre",
+            "nunca"
+          ],
+          "default": "sistema",
+          "enumDescriptions": [
+            "Follows the Windows \"reduce motion\" setting",
+            "Always animate",
+            "Never animate"
+          ],
+          "description": "When the M80 Console effects animate."
+        },
+        "m80.monitor.arcade": {
+          "type": "string",
+          "enum": [
+            "shown",
+            "hidden"
+          ],
+          "enumDescriptions": [
+            "Show the Arcade game window in the Map",
+            "Hide it: the Map takes its space"
+          ],
+          "default": "shown",
+          "description": "Arcade window in the M80 Console Map."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "m80",
+          "title": "M80 Manifest",
+          "icon": "media/m80.svg"
+        }
+      ],
+      "panel": [
+        {
+          "id": "m80monitor",
+          "title": "M80 Console",
+          "icon": "media/m80.svg"
+        }
+      ]
+    },
+    "views": {
+      "m80": [
+        {
+          "type": "webview",
+          "id": "m80.menu",
+          "name": "Menu"
+        }
+      ],
+      "m80monitor": [
+        {
+          "type": "webview",
+          "id": "m80.monitor",
+          "name": "Console"
+        }
+      ]
+    }
+  }
+}

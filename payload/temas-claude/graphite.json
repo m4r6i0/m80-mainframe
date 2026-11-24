@@ -1,0 +1,19 @@
+{
+  "name": "Graphite",
+  "base": "dark",
+  "overrides": {
+    "claude": "#6aa6ff",
+    "text": "#dadde3",
+    "inactive": "#9199a6",
+    "subtle": "#9199a6",
+    "promptBorder": "#6aa6ff",
+    "permission": "#6aa6ff",
+    "suggestion": "#7fb4ff",
+    "success": "#7BD88F",
+    "error": "#FF6B6B",
+    "warning": "#f3c677",
+    "diffAdded": "#1F4D2E",
+    "diffRemoved": "#5A2328",
+    "userMessageBackground": "#181a1d"
+  }
+}

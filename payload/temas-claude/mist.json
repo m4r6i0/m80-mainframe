@@ -1,0 +1,19 @@
+{
+  "name": "Mist",
+  "base": "light",
+  "overrides": {
+    "claude": "#4f46d8",
+    "text": "#1f2433",
+    "inactive": "#586079",
+    "subtle": "#586079",
+    "promptBorder": "#4f46d8",
+    "permission": "#4f46d8",
+    "suggestion": "#4f46d8",
+    "success": "#1C7A45",
+    "error": "#B3261E",
+    "warning": "#a05a00",
+    "diffAdded": "#C8E6D0",
+    "diffRemoved": "#F5CDCD",
+    "userMessageBackground": "#e4e8f0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Clipper 87",
+  "base": "dark-ansi",
+  "overrides": {
+    "claude": "#FFFF55",
+    "text": "#AAAAAA",
+    "inactive": "#555555",
+    "subtle": "#00AAAA",
+    "promptBorder": "#00AAAA",
+    "permission": "#55FFFF",
+    "suggestion": "#FFFF55",
+    "success": "#55FF55",
+    "error": "#FF5555",
+    "warning": "#FFFF55",
+    "diffAdded": "#00AA00",
+    "diffRemoved": "#AA0000",
+    "userMessageBackground": "#0000AA"
+  }
+}
