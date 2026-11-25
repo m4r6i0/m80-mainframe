@@ -1,5 +1,7 @@
 # M80 Mainframe
 
+![The M80 Console while Claude Code works: live map of tools, the Arcade window and the event log](images/console.gif)
+
 Retro 1980s and clean modern themes for VS Code, a live console for [Claude Code](https://claude.com/claude-code), and a one-click installer for the M80 Claude Code components. Windows 10/11, VS Code 1.85 or newer.
 
 M80 Mainframe has three parts. You can use the first two without Claude Code.
@@ -7,6 +9,8 @@ M80 Mainframe has three parts. You can use the first two without Claude Code.
 1. **34 color themes** (17 looks, each in an original and a soft version) and a menu to switch between them.
 2. **The M80 Console**: a panel next to your terminal that shows what Claude Code is doing, what it costs and how full its context is, with a map, an arcade and several tools.
 3. **The M80 components for Claude Code** (optional, installed only if you say yes): hooks, the `m80-motor` plugin, Claude themes, a project template and IBM fonts.
+
+![VS Code in the Clipper Summer 87 look, with the M80 Console in the bottom panel](images/hero-clipper.png)
 
 ## Themes
 
@@ -17,6 +21,12 @@ Seven retro looks and ten modern ones. Every look has an **original** and a **so
 | Clipper Summer 87, Turbo Pascal 7, Norton Commander 5, Green Phosphor 5151, dBase III Amber, LapLink White Paper, Quarterdeck Manifest | Graphite, Midnight, Daylight, Porcelain, Forest, Dusk, Ember, Ocean, Contrast, Mist |
 
 The switch changes the whole editor, the terminal colors and the M80 Console together.
+
+| | | |
+|---|---|---|
+| ![Clipper Summer 87](images/theme-clipper.png) Clipper Summer 87 | ![Norton Commander 5](images/theme-norton.png) Norton Commander 5 | ![Green Phosphor 5151](images/theme-phosphor.png) Green Phosphor 5151 |
+| ![dBase III Amber](images/theme-amber.png) dBase III Amber | ![Quarterdeck Manifest](images/theme-manifest.png) Quarterdeck Manifest | ![Graphite](images/theme-graphite.png) Graphite |
+| ![Midnight](images/theme-midnight.png) Midnight | ![Daylight](images/theme-daylight.png) Daylight | ![Ocean](images/theme-ocean.png) Ocean |
 
 | Keys | Action |
 |---|---|
@@ -44,6 +54,18 @@ A panel tab (next to Ports) with one screen per tab. It reads what the M80 plugi
 | **Settings** | Look, map view, interface shape, effects and Arcade. |
 | **About ?** | Versions of the extension, the plugin, the hooks and the project template, with a health check. |
 
+**Context**: how full the conversation is, cache, what fills the context and the memory budget.
+
+![Context tab](images/tab-context.png)
+
+**Savings**: money saved by the prompt cache and the model router in this session.
+
+![Savings tab](images/tab-savings.png)
+
+**Scripts**: run your project scripts with live output, without opening a window.
+
+![Scripts tab](images/tab-scripts.png)
+
 ### Arcade
 
 A window in the Map plays one of **15 classic arcade games, redrawn in our own style** (River Raid, Megamania, Keystone Kapers, Kaboom!, Missile Command, Pitfall!, Space Invaders, Frogger, Asteroids, Pong, Enduro, Pac-Man and more) when a tool finishes. You can hide the window in **Settings → Arcade window in the Map**, and set when effects animate (follow the system, always, never).
@@ -58,6 +80,8 @@ Claude Code conversations lose quality as the context fills. The console helps:
 ## M80 components for Claude Code (optional)
 
 On the first run the extension **asks** whether to install these. Nothing is written without your confirmation, and you can see the exact list first (**What changes**).
+
+![The installer asks first](images/installer.png)
 
 | Component | What it does |
 |---|---|

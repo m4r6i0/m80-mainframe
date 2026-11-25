@@ -2,8 +2,8 @@
   "name": "m80-mainframe",
   "displayName": "M80 Mainframe",
   "description": "Retro 80s and modern VS Code themes, a live console for Claude Code (map, arcade, costs, context) and a one-click installer for the M80 Claude Code components. Windows.",
-  "version": "1.17.5",
-  "publisher": "m80",
+  "version": "1.17.7",
+  "publisher": "m80-mainframe-id",
   "license": "MIT",
   "icon": "media/icon.png",
   "galleryBanner": {
