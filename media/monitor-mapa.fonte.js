@@ -260,6 +260,25 @@ function arvoreFluida() {
 // ---------- 80s views (mockup approved on 11/21): signal box panel, teletext and circuit board ----------
 // The drawing (draw1/2/3) is copied from the mockup; here only the real state (E) is translated into its format (S).
 /*@@A80@@*/
+// U1-B (circuit board): the moment the 11th action of the main session arrived. The drawing replays the "birth" of
+// the U1-B chip from this moment, so it must not change while the chip lives.
+// The action list keeps only the last 120, so all[10] changes with every new action once it is full: the moment is
+// kept the first time the session passes 10 actions, and cleared when the list is back to 10 or fewer (new round).
+let nascidoU1B = null;
+function nasceU1B(all) {
+  if (all.length <= 10) { nascidoU1B = null; return null; }
+  if (nascidoU1B == null) nascidoU1B = all[10].start;
+  return nascidoU1B;
+}
+// Subagent bus (U1 → U2/U3): the drawing grows the bus from the subagent's first action. Same issue as U1-B:
+// the list keeps only the last 120 actions, so acts[0] changes once it is full.
+const primeirasAcoes = {};
+function primeiraAcao(slot) {
+  if (!slot.acts.length) return slot.acts[0];
+  const id = slot.a.id;
+  if (!primeirasAcoes[id]) primeirasAcoes[id] = slot.acts[0];
+  return primeirasAcoes[id];
+}
 const GREGO80 = { 'α': 'a', 'β': 'b', 'γ': 'g', 'δ': 'd' };
 // tool target in the mockup format: path (shows the whole file), command with path, or text
 function arg80(alvo) {
@@ -304,7 +323,7 @@ function resumoVista() {
   const S = estado80(), L = S.slots[0].acts;
   return { vista: layoutAtual, estadoSessao: E.agentes[0].estado || '', agora: S.agora ? S.agora.tool : (S.parado || 'pensando'),
     rodando: L.filter(x => x.s === 'run').length, ok: L.filter(x => x.s === 'ok').length, erro: L.filter(x => x.s === 'err').length,
-    tempo: S.tempo,
+    tempo: S.tempo, nasceU1B: nasceU1B(L), nasceBusU2: S.slots[1] && primeiraAcao(S.slots[1]) ? primeiraAcao(S.slots[1]).start : null, acoesNovas,
     subagentes: S.slots.filter((x, i) => i && x).map(x => x.a.g + (x.vivo ? ':vivo' : ':fim') + ':' + x.acts.length) };
 }
 const DESENHA80 = { sinotico: 'draw1', teletexto: 'draw2', circuito: 'draw3' };
@@ -391,7 +410,7 @@ function limparAlvo(det) {
   if (r && a.toLowerCase().startsWith(r.toLowerCase())) a = a.slice(r.length).replace(/^\/+/, '');
   return a;
 }
-const mapaFerr = new Map(), historico = new Set(); let primeiraVivo = true;
+const mapaFerr = new Map(), historico = new Set(); let primeiraVivo = true, acoesNovas = 0;
 function sincronizar(d) {
   const v = d.vivo || {}, s = v.sessao || {}, p = E.agentes[0];
   // session tokens: sum of what the engine measured per model (input + output + cache)
@@ -419,6 +438,7 @@ function sincronizar(d) {
   const naLista = new Set((v.eventos || []).map(e => e.id + '@' + e.ini));
   const parada = p.parou;
   for (const f of E.ferr) if (f.fim == null && (!naLista.has(f.id) || (parada && f.ag === 'principal'))) f.fim = Date.now();
+  acoesNovas = 0;
   for (const e of v.eventos || []) {
     const k = e.id + '@' + e.ini; let f = mapaFerr.get(k);
     // live panel: whatever had already finished before the panel opened (Reload Window) is left out;
@@ -427,8 +447,11 @@ function sincronizar(d) {
     if (!f) {
       // visto = when the panel saw the action: the trail starts being drawn from there
       f = { id: k, ag: e.agente, tool: e.tool, alvo: limparAlvo(e.detalhe), ini: e.ini, visto: Date.now(), fim: null, ok: true };
-      mapaFerr.set(k, f); E.ferr.push(f);
-      if (E.ferr.length > 120) mapaFerr.delete(E.ferr.shift().id);
+      mapaFerr.set(k, f); E.ferr.push(f); acoesNovas++;
+      // the action that leaves the list goes to the history: the engine file still carries it (it keeps the last 300),
+      // and without this it came back on the next sync as "new", pushed another one out, and so on every second
+      // (the rows were reborn every second: the blinking)
+      if (E.ferr.length > 120) { const sai = E.ferr.shift(); mapaFerr.delete(sai.id); historico.add(sai.id); }
       if (e.fim == null && !primeiraVivo) E.ecos.push({ ag: e.agente, t: Date.now() });
     }
     if (e.fim != null && f.fim == null) {
